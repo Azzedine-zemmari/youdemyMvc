@@ -1,9 +1,9 @@
 <?php
 
 define('DB_HOST','localhost');
-define('DB_USER','root');
+define('DB_USER','postgres');
 define('DB_PASS','Azzedine2004');
-define('DB_NAME','...');
+define('DB_NAME','youdemyMvc');
 
 // App Root
 define('APPROOT',dirname(dirname(__FILE__)));
