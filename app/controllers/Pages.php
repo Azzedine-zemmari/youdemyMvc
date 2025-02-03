@@ -1,7 +1,11 @@
 <?php
 
-class Pages{
+class Pages extends Controller{
     public function index(){
-        echo 'am pages controllers';
+        $data = ['title'=>'welcome'];
+        $this->view('Pages/index',$data);
+    }
+    public function about(){
+        echo '<h1>About us</h1>';
     }
 }
