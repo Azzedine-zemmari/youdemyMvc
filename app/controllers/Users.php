@@ -9,6 +9,9 @@ class Users extends  Controller{
     }
     public function register(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(!$this->validateCsrf($_POST['csrf_token'])){
+                die("invalid csrf token");
+            }
             $data = [
                 'name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
@@ -62,13 +65,17 @@ class Users extends  Controller{
                 'name_err' => '',
                 'email_err' => '',
                 'password_err' => '',
-                'Role_err' => ''
+                'Role_err' => '',
+                'csrf_token' => $this->generateCsrf()
             ];
             $this->view('users/register',$data);
         }
     }
     public function login(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(!$this->validateCsrf($_POST['csrf_token'])){
+                die("invalid csrf token");
+            }
             $data = [
                 'email' => trim($_POST['email']),
                 'password'=>trim($_POST['password']),
@@ -101,7 +108,18 @@ class Users extends  Controller{
                 'password'=>'',
                 'email_err' => '',
                 'password_err' => '',
+                'csrf_token' => $this->generateCsrf()
             ];
             $this->view('users/login',$data);
         }}
+    // generate a csrf token
+    private function generateCsrf(){
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        return $_SESSION['csrf_token'];
+    }
+
+    // validate the csrf token
+    private function validateCsrf($token){
+        return isset($_SESSION['csrf_token']) && $_SESSION['csrf_token'] === $token;
+    }
 }

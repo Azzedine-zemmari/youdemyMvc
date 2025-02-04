@@ -6,6 +6,7 @@
             <p>Please fill out all the fields</p>
             <form action="<?php echo URLROOT; ?>/Users/register" method="post">
                 <div class="form-group">
+                    <input type="hidden" name="csrf_token" value="<?= $data['csrf_token'] ?>">
                     <label for="name">Name:<sup>*</sup></label>
                     <input type="text" name="name" class="form-control form-control-lg <?php echo (!empty($data['name_err'])) ? 'is-invalid': '';?>"
                            value="<?php echo $data['name']; ?>">
