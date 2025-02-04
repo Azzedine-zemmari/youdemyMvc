@@ -1,7 +1,12 @@
-<h1><?php echo $data['title'];?></h1>
-<?php print_r($data); ?>
-<ul>
-    <?php foreach ($data['users'] as $user): ?>
-    <li><?php echo $user->name ?></li>
-    <?php endforeach;?>
-</ul>
+    <?php require APPROOT. '/views/inc/header.php';?>
+    <div class="px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4" src="<?php echo URLROOT; ?>/public/img/logo.png" alt="" width="72" height="57">
+        <h1 class="display-5 fw-bold text-body-emphasis">Course Platform</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <button type="button" class="btn btn-primary btn-lg px-4 gap-3"><a href="<?=URLROOT ?>/Course/index">View Courses</a></button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            </div>
+        </div>
+    </div>
