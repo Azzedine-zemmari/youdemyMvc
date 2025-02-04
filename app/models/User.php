@@ -27,4 +27,38 @@ class User{
         }
 
     }
+    public function login($email,$password){
+        $this->db->query("select * from users where email = :email");
+        $this->db->bind(":email",$email);
+
+        $row = $this->db->single();
+
+        $hashedPassword = $row->password;
+
+        if(password_verify($password,$hashedPassword)){
+            return $row;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function createUserSession($user){
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_name'] = $user->name;
+        $_SESSION['user_email'] = $user->email;
+        header("Location: ".URLROOT."/Pages/index");
+    }
+
+    public function findByEmail($email){
+        $this->db->query("select * from users where email = :email");
+        $this->db->bind(":email",$email);
+        $this->db->single();
+        if($this->db->rowCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
