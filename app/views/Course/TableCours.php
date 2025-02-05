@@ -27,8 +27,8 @@
         <td><?= $cour->enseignant ?></td>
         <td><?= $cour->tags ?></td>
         <td>
-            <a href="<?php URLROOT ?>/Course/update/<?= $cour->idcours ?>">Update</a>
-            <a href="<?php URLROOT ?>/Course/delete/<?= $cour->idcours ?>">Delete</a>
+            <a href="<?php APPROOT ?>/Course/update/<?= $cour->idcours ?>">Update</a>
+            <a href="<?php APPROOT ?>/Course/delete/<?= $cour->idcours ?>">Delete</a>
 
         </td>
     </tr>

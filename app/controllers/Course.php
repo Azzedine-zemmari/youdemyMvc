@@ -147,4 +147,7 @@ class Course extends Controller{
         $data = ['Courses'=>$this->CourseModel->getAllCourses()];
         $this->view('Course/TableCours',$data);
     }
+    public function delete($id){
+        $this->CourseModel->deleteCourse($id);
+    }
 }

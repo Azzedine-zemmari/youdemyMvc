@@ -119,4 +119,9 @@ GROUP BY cours.idcours, category.nom, users.name");
 
            return $this->db->execute();
             }
+public function deleteCourse($id){
+        $this->db->query("delete from cours where idcours = :id");
+        $this->db->bind(":id",$id);
+        return $this->db->execute();
+}
 }
