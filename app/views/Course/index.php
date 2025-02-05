@@ -1,5 +1,4 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<?php var_dump($data); ?>
     <section class="min-vh-100 bg-light">
         <div class="container px-4 px-sm-6 px-xxl-0 mx-auto">
             <!-- Hero Section -->

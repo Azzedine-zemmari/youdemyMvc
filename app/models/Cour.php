@@ -81,4 +81,42 @@ GROUP BY cours.idcours, category.nom, users.name");
 
 
     }
+    public function searchCourse($search){
+        $this->db->query("select * from cours where titre like :search");
+        $this->db->bind(":search",'%'.$search.'%');
+        $this->db->resultSet();
+    }
+
+    public function getCourById($id){
+        $this->db->query("select * from cours WHERE idcours = :id ");
+        $this->db->bind(":id",$id);
+        return  $this->db->single();
+    }
+        public function updateCours($data, $id) {
+            $type = isset($data['content']) ? 'text': 'vedeo';
+            $this->db->query("UPDATE cours 
+                  SET titre = :titre, 
+                      description = :description, 
+                      contenu = :contenu, 
+                      vedeo = :vedeo, 
+                      categoryid = :categoryId, 
+                      enseignantid = :enseignantId, 
+                      datecreation = :dateCreation, 
+                      type = :type, 
+                      price = :price 
+                  WHERE idcours = :id");
+
+            $this->db->bind(":titre", $data['titre']);
+            $this->db->bind(":description", $data['description']);
+            $this->db->bind(":contenu", isset($data['content']) ? $data['content'] : null);
+            $this->db->bind(":vedeo", isset($data['vedeo']) ? $data['vedeo'] : null);
+            $this->db->bind(":categoryId", $data['categorieId']);
+            $this->db->bind(":enseignantId", $data['enseignat_id']);
+            $this->db->bind(":dateCreation", date('Y-m-d H:i:s'));
+            $this->db->bind(":type", $type); // 'text' or 'vedeo'
+            $this->db->bind(":price", $data['price']);
+            $this->db->bind(":id", $id);
+
+           return $this->db->execute();
+            }
 }
