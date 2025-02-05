@@ -17,7 +17,7 @@ FROM cours
 left JOIN category ON category.idCategory = cours.categoryid
 left JOIN users ON users.id = cours.enseignantid
 left JOIN cours_tags ON cours.idcours = cours_tags.cours_id
-left JOIN tags ON tags.idtadg = cours_tags.tag_id
+left JOIN tags ON tags.idtag = cours_tags.tag_id
 GROUP BY cours.idcours, category.nom, users.name");
         return $this->db->resultSet();
     }
@@ -44,6 +44,8 @@ GROUP BY cours.idcours, category.nom, users.name");
         else{
             return false;
         }
+        try{
+            $this->db->beginTransaction();
             $this->db->query("insert into cours(titre,description,$field,categoryid,enseignantid,datecreation,type,price) 
             values(:titre,:description,:$field,:categoryId,:enseignantId,:dateCreation,:type,:price)");
             $this->db->bind(":titre",$data['titre']);
@@ -55,6 +57,28 @@ GROUP BY cours.idcours, category.nom, users.name");
             $this->db->bind(":type",$type);
             $this->db->bind(":price",$data['price']);
 
-            return $this->db->execute();
+            if(!$this->db->execute()){
+                throw new Exception("Failed to insert the cour");
+            }
+
+                $lastId = $this->db->lastInsertId('cours_idcours_seq');
+                foreach ($data['tags'] as $tag){
+                    $this->db->query("insert into cours_tags(cours_id,tag_id) values (:cours_id,:tag_id)");
+                    $this->db->bind(":cours_id",$lastId);
+                    $this->db->bind(":tag_id",$tag);
+                    if (!$this->db->execute()) {
+                        throw new Exception("Failed to insert tag with ID: $tag");
+                    }
+                }
+
+                $this->db->commit();
+                return true;
+        }catch (Exception $e){
+            $this->db->rollBack();
+            echo "Error".$e->getMessage();
+            return false;
+        }
+
+
     }
 }

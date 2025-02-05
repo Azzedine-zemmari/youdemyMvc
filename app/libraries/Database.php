@@ -66,4 +66,20 @@ class Database{
     public function rowCount(){
         return $this->stmt->rowCount();
     }
+
+    // get the laste inserted id
+    public function lastInsertId($seqName = null){
+        return $this->dbh->lastInsertId($seqName);
+    }
+
+    public function beginTransaction(){
+        return $this->dbh->beginTransaction();
+    }
+
+    public function commit(){
+        return $this->dbh->commit();
+    }
+    public function rollBack(){
+        return $this->dbh->rollBack();
+    }
 }

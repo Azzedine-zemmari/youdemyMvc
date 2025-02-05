@@ -21,7 +21,7 @@ class Course extends Controller{
                 'content' => isset($_POST['checkbox']) ? $_POST['content'] : null,
                 'vedeo' => !isset($_POST['checkbox']) && isset($_FILES['contentVedeo']) ? $_FILES['contentVedeo'] : null,
                 'categorieId' => $_POST['categorieId'],
-//                'tags' => null,
+                'tags' => $_POST['tags'],
                 'price' => $_POST['price'],
                 'enseignat_id' => $_POST['idUser']
             ];
@@ -30,6 +30,37 @@ class Course extends Controller{
                 echo "Error: All fields are required.";
                 return;
             }
+            if ($data['vedeo']) {
+                $allowedTypes = ['video/mp4', 'video/webm', 'video/ogg'];
+                $maxSize = 800 * 1024 * 1024; // 800MB
+
+                // Validate file type
+                if (!in_array($data['vedeo']['type'], $allowedTypes)) {
+                    echo "Error: Invalid video format. Allowed formats: MP4, WebM, Ogg.";
+                    return;
+                }
+
+                // Validate file size
+                if ($data['vedeo']['size'] > $maxSize) {
+                    echo "Error: File size exceeds the limit of 800MB.";
+                    return;
+                }
+
+                // Define the upload directory and file path
+                $uploadDir = __DIR__ . '/../../public/uploads/';
+
+                $fileExtension = pathinfo($data['vedeo']['name'], PATHINFO_EXTENSION);
+                $fileName = uniqid('video_') . '.' . $fileExtension;
+                $filePath = $uploadDir . $fileName;
+
+                if (!move_uploaded_file($data['vedeo']['tmp_name'], $filePath)) {
+                    echo "Error: Failed to upload the video file.";
+                    return;
+                }
+
+                $data['vedeo'] = $fileName;
+            }
+
 
             if($this->CourseModel->insertCours($data)){
                 echo "course inserted";

@@ -57,7 +57,7 @@
                         <div class="card bg-white rounded-3 shadow-lg overflow-hidden transform hover-translate-y-n2 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
                             <div class="position-relative">
                                 <video width="320" height="240" alt="Course" class="card-img-top w-100 h-48 object-cover transition-transform duration-300 group-hover-scale-110">
-                                    <source src="../../uploads/<?= $cour->vedeo ?>" type="video/mp4">
+                                    <source src="<?= URLROOT?>/uploads/<?= $cour->vedeo ?>" type="video/mp4">
                                 </video>
                                 <div class="position-absolute top-0 end-0 bg-success text-white px-3 py-1 rounded-pill small fw-medium m-3">
                                     Popular
