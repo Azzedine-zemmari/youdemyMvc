@@ -21,6 +21,21 @@ left JOIN tags ON tags.idtag = cours_tags.tag_id
 GROUP BY cours.idcours, category.nom, users.name");
         return $this->db->resultSet();
     }
+    public function getAllCoursesForSpecifiqueEnseignant($id){
+        $this->db->query("SELECT cours.*, 
+                             category.nom AS CategoryName, 
+                             users.name AS Enseignant,
+                             STRING_AGG(tags.nom, ', ') AS tags
+                      FROM cours
+                      LEFT JOIN category ON category.idCategory = cours.categoryid
+                      LEFT JOIN users ON users.id = cours.enseignantid
+                      LEFT JOIN cours_tags ON cours.idcours = cours_tags.cours_id
+                      LEFT JOIN tags ON tags.idtag = cours_tags.tag_id
+                      WHERE cours.enseignantid = :id
+                      GROUP BY cours.idcours, category.nom, users.name");
+        $this->db->bind(":id",$id);
+        return $this->db->resultSet();
+    }
 
     public function getCategories(){
         $this->db->query('select * from category ');

@@ -144,7 +144,7 @@ class Course extends Controller{
         }
     }
     public function showAllCourses(){
-        $data = ['Courses'=>$this->CourseModel->getAllCourses()];
+        $data = ['Courses'=>$this->CourseModel->getAllCoursesForSpecifiqueEnseignant($_SESSION['user_id'])];
         $this->view('Course/TableCours',$data);
     }
     public function delete($id){
@@ -161,5 +161,9 @@ class Course extends Controller{
 //        die();
        $data = ['Courses'=>$Courses];
        $this->view('Pages/MyCourse',$data);
+   }
+   public function ShowAllForAdmin(){
+       $data = ['Courses'=>$this->CourseModel->getAllCourses()];
+       $this->view('Pages/Admin/AllCourses',$data);
    }
 }
