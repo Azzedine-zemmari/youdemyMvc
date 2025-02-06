@@ -133,4 +133,9 @@ class Users extends  Controller{
             header("Location: ".URLROOT."/Users/ShowAllEnseignants");
         }
     }
+    public function updateStatusToDesactive($id){
+        if($this->userModel->desactivateEnseignant($id)){
+            header("Location: ".URLROOT."/Users/ShowAllEnseignants");
+        }
+    }
 }

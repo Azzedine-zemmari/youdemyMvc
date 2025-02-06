@@ -73,4 +73,10 @@ class User{
         $this->db->bind(":id",$id);
         return $this->db->execute();
     }
+    public function desactivateEnseignant($id){
+        $this->db->query("update users set status = :status where id = :id");
+        $this->db->bind(":status",'desactive');
+        $this->db->bind(":id",$id);
+        return $this->db->execute();
+    }
 }
