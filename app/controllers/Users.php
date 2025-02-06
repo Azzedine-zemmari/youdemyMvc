@@ -122,4 +122,10 @@ class Users extends  Controller{
     private function validateCsrf($token){
         return isset($_SESSION['csrf_token']) && $_SESSION['csrf_token'] === $token;
     }
+
+    public function ShowAllEnseignants(){
+        $Enseignants = $this->userModel->getAllEnseignants();
+        $data = ['Enseignants' => $Enseignants];
+        $this->view('Pages/Admin/AllEnseignant',$data);
+    }
 }

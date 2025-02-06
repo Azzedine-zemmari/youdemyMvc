@@ -71,6 +71,10 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="h4 fw-bold text-success">$<?= $cour->price ?></span>
                                 </div>
+                                <form action="<?= URLROOT ?>/Course/Enroll/<?= $cour->idcours ?>" method="post">
+                                    <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
+                                    <button>Enroll</button>
+                                </form>
                             </div>
                         </div>
                     </div>

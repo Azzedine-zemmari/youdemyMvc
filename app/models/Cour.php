@@ -124,4 +124,18 @@ public function deleteCourse($id){
         $this->db->bind(":id",$id);
         return $this->db->execute();
 }
+public function EnrollCourse($idCours,$idUser){
+        $this->db->query("insert into favoris(etudiant_id,cours_id,date_ajout) values (:idUser,:idCour,:date)");
+        $this->db->bind(":idUser",$idUser);
+        $this->db->bind(":idCour",$idCours);
+        $this->db->bind(":date",date('Y-m-d H:i:s'));
+
+        return $this->db->execute();
+
+}
+    public function EnrolledCoursesByStudent($idUser){
+        $this->db->query("select cours.titre , cours.description , favoris.date_ajout from cours join favoris on cours.idcours = favoris.cours_id where favoris.etudiant_id = :id");
+        $this->db->bind(":id",$idUser);
+        return $this->db->resultSet();
+    }
 }

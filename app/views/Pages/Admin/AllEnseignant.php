@@ -1,0 +1,25 @@
+<?php require APPROOT . '/views/inc/header.php'; ?>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">name</th>
+        <th scope="col">email</th>
+        <th scope="col">status</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($data['Enseignants'] as $enseignant): ?>
+    <tr>
+        <td><?= $enseignant->name ?></td>
+        <td><?= $enseignant->email ?></td>
+        <td><?= $enseignant->status ?></td>
+        <td>
+            <a href="<?= URLROOT ?>/User/update/<?= $enseignant->id ?>">Update</a>
+            <a href="<?= URLROOT ?>/User/delete/<?= $enseignant->id ?>">Delete</a>
+
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

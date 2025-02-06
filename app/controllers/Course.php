@@ -150,4 +150,16 @@ class Course extends Controller{
     public function delete($id){
         $this->CourseModel->deleteCourse($id);
     }
+    public function Enroll($id){
+        $userId = $_POST['user_id'];
+        $this->CourseModel->EnrollCourse($id,$userId);
+        header("Location: ".URLROOT."/Course/EnrolledCourses");
+    }
+   public function EnrolledCourses(){
+        $Courses = $this->CourseModel->EnrolledCoursesByStudent($_SESSION['user_id']);
+//        var_dump($Courses);
+//        die();
+       $data = ['Courses'=>$Courses];
+       $this->view('Pages/MyCourse',$data);
+   }
 }

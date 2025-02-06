@@ -62,4 +62,9 @@ class User{
             return false;
         }
     }
+    public function getAllEnseignants(){
+        $this->db->query("select * from users where role = :role");
+        $this->db->bind(":role",'Enseignant');
+        return $this->db->resultSet();
+    }
 }
