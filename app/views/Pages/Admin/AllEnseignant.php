@@ -15,8 +15,8 @@
         <td><?= $enseignant->email ?></td>
         <td><?= $enseignant->status ?></td>
         <td>
-            <a href="<?= URLROOT ?>/User/update/<?= $enseignant->id ?>">Update</a>
-            <a href="<?= URLROOT ?>/User/delete/<?= $enseignant->id ?>">Delete</a>
+            <a href="<?= URLROOT ?>/Users/updateStatusToActive/<?= $enseignant->id ?>">Active</a>
+            <a href="<?= URLROOT ?>/Users/delete/<?= $enseignant->id ?>">Delete</a>
 
         </td>
     </tr>

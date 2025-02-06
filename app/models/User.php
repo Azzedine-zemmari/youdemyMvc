@@ -67,4 +67,10 @@ class User{
         $this->db->bind(":role",'Enseignant');
         return $this->db->resultSet();
     }
+    public function validateEnseignant($id){
+        $this->db->query("update users set status = :status where id = :id");
+        $this->db->bind(":status",'active');
+        $this->db->bind(":id",$id);
+        return $this->db->execute();
+    }
 }

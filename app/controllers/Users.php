@@ -128,4 +128,9 @@ class Users extends  Controller{
         $data = ['Enseignants' => $Enseignants];
         $this->view('Pages/Admin/AllEnseignant',$data);
     }
+    public function updateStatusToActive($id){
+        if($this->userModel->validateEnseignant($id)){
+            header("Location: ".URLROOT."/Users/ShowAllEnseignants");
+        }
+    }
 }
