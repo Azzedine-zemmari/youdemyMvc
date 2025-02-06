@@ -7,11 +7,11 @@
     </tr>
     </thead>
     <tbody>
-    <?php foreach ($data['Category'] as $category): ?>
+    <?php foreach ($data['Tags'] as $tag): ?>
         <tr>
-            <td><?= $category->nom ?></td>
+            <td><?= $tag->nom ?></td>
             <td>
-                <a href="<?= URLROOT ?>/Categorie/deleteCategory/<?= $category->idcategory ?>">Delete</a>
+                <a href="<?= URLROOT ?>/Tags/deleteCategory/<?= $tag->idtag ?>">Delete</a>
 
             </td>
         </tr>
