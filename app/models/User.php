@@ -79,4 +79,19 @@ class User{
         $this->db->bind(":id",$id);
         return $this->db->execute();
     }
+    public function topthreeTeachers(){
+        $this->db->query("SELECT u1.name, COUNT(favoris.cours_id) AS enrolle_count
+        FROM users u1
+        JOIN cours ON cours.enseignantid = u1.id
+        JOIN favoris ON favoris.cours_id = cours.idcours
+        GROUP BY u1.id
+        ORDER BY enrolle_count DESC
+        LIMIT 3;");
+        return $this->db->resultSet();
+    }
+    public function CourCount()
+    {
+        $this->db->query("select count(*) as total from cours");
+        return $this->db->single();
+    }
 }

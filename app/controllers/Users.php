@@ -125,7 +125,9 @@ class Users extends  Controller{
 
     public function ShowAllEnseignants(){
         $Enseignants = $this->userModel->getAllEnseignants();
-        $data = ['Enseignants' => $Enseignants];
+        $ToPthree = $this->topThreeTeacher();
+        $CountCours = $this->CountCours();
+        $data = ['Enseignants' => $Enseignants,'Teachers'=>$ToPthree ,'CountCours' => $CountCours];
         $this->view('Pages/Admin/AllEnseignant',$data);
     }
     public function updateStatusToActive($id){
@@ -138,4 +140,11 @@ class Users extends  Controller{
             header("Location: ".URLROOT."/Users/ShowAllEnseignants");
         }
     }
+    public function topThreeTeacher(){
+        return $this->userModel->topthreeTeachers();
+    }
+    public function CountCours(){
+        return $this->userModel->CourCount();
+    }
+
 }
