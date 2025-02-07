@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
+<?php require APPROOT . '/views/inc/AdminNavigation.php'; ?>
 <!-- Top Three Teachers Section -->
 <div class="container mt-5">
     <h2 class="mb-4">Top Three Teachers</h2>

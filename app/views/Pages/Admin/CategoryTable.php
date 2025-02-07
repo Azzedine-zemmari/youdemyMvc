@@ -1,4 +1,7 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
+<?php require APPROOT . '/views/inc/AdminNavigation.php'; ?>
+<button class="btn btn-primary">
+    <a class="text-white" href="<?php  echo URLROOT ?>/Categorie/insertCategory">Add Category</a>
+</button>
 <table class="table table-striped">
     <thead>
     <tr>

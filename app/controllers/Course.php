@@ -63,7 +63,7 @@ class Course extends Controller{
 
 
             if($this->CourseModel->insertCours($data)){
-                echo "course inserted";
+                header("Location: ".URLROOT."/Course/index");
             }
             else{
                 echo "Text course not inserted";
@@ -129,7 +129,7 @@ class Course extends Controller{
 
 
             if($this->CourseModel->updateCours($data,$id)){
-                echo "course updated";
+                $this->view('Course/index');
             }
             else{
                 echo "course not updated";

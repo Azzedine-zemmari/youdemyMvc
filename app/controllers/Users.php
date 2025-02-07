@@ -146,5 +146,10 @@ class Users extends  Controller{
     public function CountCours(){
         return $this->userModel->CourCount();
     }
+    public function logout(){
+        session_unset();
+        session_destroy();
+        header("Location: " . URLROOT.'/Users/login');
+    }
 
 }

@@ -71,10 +71,12 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="h4 fw-bold text-success">$<?= $cour->price ?></span>
                                 </div>
+                                <?php if(isset($_SESSION['user_id'])): ?>
                                 <form action="<?= URLROOT ?>/Course/Enroll/<?= $cour->idcours ?>" method="post">
                                     <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
                                     <button>Enroll</button>
                                 </form>
+                                <?php endif;?>
                             </div>
                         </div>
                     </div>
